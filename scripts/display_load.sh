@@ -1,7 +1,20 @@
 #!/bin/bash
 
 which=${1:-short}
-#cpus=$( sysctl -n hw.ncpu )
+cpus=$( sysctl -n hw.ncpu )
+
+format_load() {
+	load=$1
+	if [[ $load > $cpus ]]; then
+		printf "#[fg=colour160]"
+	elif [[ $load > $(( cpus / 2 )) ]]; then
+		printf "#[fg=colour226]"
+	else
+		printf "#[fg=colour40]"
+	fi
+	echo "$load"
+}
+
 
 declare -a uptimes
 uptimes=( $( uptime | awk '{
@@ -13,7 +26,7 @@ uptimes=( $( uptime | awk '{
 }' ) )
 
 if [[ $which == "short" ]]; then
-	echo "${uptimes[0]}"
+	format_load "${uptimes[0]}"
 else
 	echo "${uptimes[0]} ${uptimes[1]} ${uptimes[2]}"
 fi
