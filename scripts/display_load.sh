@@ -4,14 +4,14 @@ which=${1:-short}
 os=$(uname -s)
 case $os in
     Linux|Darwin)
-        cpus=$( getconf NPROCESSORS_ONLN )
+        cpus=$( getconf _NPROCESSORS_ONLN )
         ;;
     FreeBSD)
-        cpus=$( getconf _NPROCESSORS_ONLN )
+        cpus=$( getconf NPROCESSORS_ONLN )
         ;;
     *)
         # What do I do now, Mum?
-        cpus=4
+        cpus=1
 esac
 
 
