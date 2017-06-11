@@ -19,8 +19,8 @@ Manager](https://github.com/tmux-plugins/tpm).
     set -g @plugin 'jamesoff/tmux-loadavg'
     ```
 
-2. Use <kbd>prefix</kbd>–<kbd>I</kbd> to install `tmux-loadavg`. You should now
-    be able to `tmux-loadavg` immediately.
+2. Use <kbd>prefix</kbd>–<kbd>I</kbd> to install `tmux-loadavg`.
+
 3. When you want to update `tmux-loadavg` use <kbd>prefix</kbd>–<kbd>U</kbd>.
 
 ### Manual Installation
@@ -53,3 +53,17 @@ Edit your `status-left` or `status-right` setting to include one of:
 
 The values are coloured green, orange or red depending on how they compare to
 the number of CPUs you have.
+
+For example in `.tmux.conf`:
+
+    ```
+    # display 1min load average and hostname on right of status bar
+    set -g status-right " #{load_short} #h"
+    ```
+
+Reload your configuration for it to take effect: <kbd>prefix</kbd>-<kbd>R</kbd>, or
+
+    ``` sh
+    $ tmux source-file ~/.tmux.conf
+    ```
+
