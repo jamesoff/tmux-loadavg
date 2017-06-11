@@ -8,9 +8,9 @@ format_load() {
 	if [[ $load > $cpus ]]; then
 		printf "#[fg=colour160]"
 	elif [[ $load > $(( cpus / 2 )) ]]; then
-		printf "#[fg=colour226]"
+		printf "#[fg=colour214]"
 	else
-		printf "#[fg=colour40]"
+		printf "#[fg=colour70]"
 	fi
 	echo "$load"
 }
@@ -28,5 +28,5 @@ uptimes=( $( uptime | awk '{
 if [[ $which == "short" ]]; then
 	format_load "${uptimes[0]}"
 else
-	echo "${uptimes[0]} ${uptimes[1]} ${uptimes[2]}"
+	echo "$(format_load "${uptimes[0]}") $(format_load "${uptimes[1]}") $(format_load "${uptimes[2]}")"
 fi
