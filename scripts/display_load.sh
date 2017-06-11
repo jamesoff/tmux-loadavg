@@ -29,7 +29,12 @@ format_load() {
 
 
 declare -a uptimes
-uptimes=( $( uptime | awk '{
+uptimes=( $( uptime | awk '
+BEGIN {
+        FS=",? "
+}
+
+{
 	min15=NF
 	min5=NF-1
 	min1=NF-2
