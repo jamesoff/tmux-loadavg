@@ -1,7 +1,19 @@
 #!/bin/bash
 
 which=${1:-short}
-cpus=$( sysctl -n hw.ncpu )
+os=$(uname -s)
+case $os in
+    Linux|Darwin)
+        cpus=$( getconf NPROCESSORS_ONLN )
+        ;;
+    FreeBSD)
+        cpus=$( getconf _NPROCESSORS_ONLN )
+        ;;
+    *)
+        # What do I do now, Mum?
+        cpus=4
+esac
+
 
 format_load() {
 	load=$1
@@ -25,8 +37,13 @@ uptimes=( $( uptime | awk '{
 	print $min1, $min5, $min15
 }' ) )
 
-if [[ $which == "short" ]]; then
-	format_load "${uptimes[0]}"
-else
-	echo "$(format_load "${uptimes[0]}") $(format_load "${uptimes[1]}") $(format_load "${uptimes[2]}")"
-fi
+case $which in
+    short)
+        format_load "${uptimes[0]}"
+        ;;
+    full)
+        echo "$(format_load "${uptimes[0]}") $(format_load "${uptimes[1]}") $(format_load "${uptimes[2]}")"
+        ;;
+    *)
+        echo "Usage: $0 [short|full]"
+esac
