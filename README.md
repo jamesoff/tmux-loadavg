@@ -5,6 +5,8 @@ Display load average in [`tmux`](https://tmux.github.io/) status bar.
 Supports:
 
 - macOS
+- Linux
+- FreeBSD
 
 ## Installing
 
@@ -61,7 +63,7 @@ For example in `.tmux.conf`:
 set -g status-right " #{load_short} #h"
 ```
 
-Reload your configuration for it to take effect: <kbd>prefix</kbd>-<kbd>R</kbd>, or
+Reload your configuration for it to take effect: <kbd>prefix</kbd>-<kbd>R</kbd> with TPM, or
 
 ``` sh
 $ tmux source-file ~/.tmux.conf
