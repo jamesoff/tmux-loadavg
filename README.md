@@ -56,14 +56,14 @@ the number of CPUs you have.
 
 For example in `.tmux.conf`:
 
-    ```
-    # display 1min load average and hostname on right of status bar
-    set -g status-right " #{load_short} #h"
-    ```
+```
+# display 1min load average and hostname on right of status bar
+set -g status-right " #{load_short} #h"
+```
 
 Reload your configuration for it to take effect: <kbd>prefix</kbd>-<kbd>R</kbd>, or
 
-    ``` sh
-    $ tmux source-file ~/.tmux.conf
-    ```
+``` sh
+$ tmux source-file ~/.tmux.conf
+```
 
