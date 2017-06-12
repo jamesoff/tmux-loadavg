@@ -14,9 +14,6 @@ case $os in
         cpus=1
 esac
 
-# calculate once to avoid repeating 3x for full display
-half_cpus=$( awk "BEGIN { print $cpus / 2 }" )
-
 
 format_load() {
 	load=$1
@@ -32,7 +29,7 @@ format_load() {
 
 
 declare -a uptimes
-uptimes=( $( uptime | awk '
+uptimes=( $( uptime | awk -v "cpus=$cpus" '
 BEGIN {
         FS=",? "
 }
@@ -42,8 +39,10 @@ BEGIN {
 	min5=NF-1
 	min1=NF-2
 
-	print $min1, $min5, $min15
+	print $min1, $min5, $min15, cpus / 2
 }' ) )
+
+half_cpus=${uptimes[3]}
 
 case $which in
     short)
