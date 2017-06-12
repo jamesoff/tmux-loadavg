@@ -14,12 +14,15 @@ case $os in
         cpus=1
 esac
 
+# calculate once to avoid repeating 3x for full display
+half_cpus=$( awk "BEGIN { print $cpus / 2 }" )
+
 
 format_load() {
 	load=$1
 	if [[ $load > $cpus ]]; then
 		printf "#[fg=colour160]"
-	elif [[ $load > $( echo "scale=2; $cpus / 2" | bc ) ]]; then
+	elif [[ $load > $half_cpus ]]; then
 		printf "#[fg=colour214]"
 	else
 		printf "#[fg=colour70]"
