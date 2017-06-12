@@ -19,7 +19,7 @@ format_load() {
 	load=$1
 	if [[ $load > $cpus ]]; then
 		printf "#[fg=colour160]"
-	elif [[ $load > $(( cpus / 2 )) ]]; then
+	elif [[ $load > $( echo "scale=2; $cpus / 2" | bc ) ]]; then
 		printf "#[fg=colour214]"
 	else
 		printf "#[fg=colour70]"
