@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 which=${1:-short}
 os=$(uname -s)
