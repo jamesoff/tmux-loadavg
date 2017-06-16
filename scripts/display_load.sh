@@ -16,15 +16,35 @@ esac
 
 
 format_load() {
-	load=$1
-	if [[ $load > $cpus ]]; then
-		printf "#[fg=colour160]"
-	elif [[ $load > $half_cpus ]]; then
-		printf "#[fg=colour214]"
-	else
-		printf "#[fg=colour70]"
-	fi
-	echo "$load"
+	load_info=$( awk \
+		-v "load=$1" \
+		-v "cpus=$cpus" \
+		-v "half_cpus=$half_cpus" \
+		'BEGIN {
+			if ( load > cpus ) {
+				print "high"
+			}
+			else if ( load > half_cpus ) {
+				print "medium"
+			}
+			else {
+				print "low"
+			}
+		}'
+	)
+
+	case $load_info in
+		high)
+			printf "#[fg=colour160]"
+			;;
+		medium)
+			printf "#[fg=colour214]"
+			;;
+		low)
+			printf "#[fg=colour70]"
+			;;
+	esac
+	echo "$1"
 }
 
 
