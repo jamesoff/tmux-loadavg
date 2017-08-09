@@ -30,7 +30,7 @@ Manager](https://github.com/tmux-plugins/tpm).
 1. Clone the repository
 
     ``` sh
-    $ git clone https://github.com/jamesoff/tmux-uptime ~/clone/path
+    $ git clone https://github.com/jamesoff/tmux-loadavg ~/clone/path
     ```
 
 2. Add this line to the bottom of `.tmux.conf`
