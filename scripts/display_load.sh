@@ -17,14 +17,14 @@ esac
 
 format_load() {
 	load_info=$( awk \
-		-v "load=$1" \
+		-v "sys_load=$1" \
 		-v "cpus=$cpus" \
 		-v "half_cpus=$half_cpus" \
 		'BEGIN {
-			if ( load > cpus ) {
+			if ( sys_load > cpus ) {
 				print "high"
 			}
-			else if ( load > half_cpus ) {
+			else if ( sys_load > half_cpus ) {
 				print "medium"
 			}
 			else {
